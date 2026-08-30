@@ -1,50 +1,70 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
-
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    <div className="app">
+      <aside className="sidebar">
+        <div className="brand">
+          <h1>FileM4ster</h1>
+          <span>v0.1</span>
+        </div>
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+        <nav className="navigation">
+          <button className="nav-item active">New Transfer</button>
+          <button className="nav-item">Jobs</button>
+          <button className="nav-item">Connections</button>
+          <button className="nav-item">Settings</button>
+        </nav>
+      </aside>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+      <main className="content">
+        <header className="page-header">
+          <div>
+            <p className="eyebrow">TRANSFER</p>
+            <h2>New Transfer</h2>
+          </div>
+        </header>
+
+        <section className="transfer-card">
+          <div className="field">
+            <label>Source</label>
+
+            <div className="path-row">
+              <div className="path-placeholder">Select source...</div>
+              <button>Browse</button>
+            </div>
+          </div>
+
+          <div className="transfer-arrow">↓</div>
+
+          <div className="field">
+            <label>Destination</label>
+
+            <div className="path-row">
+              <div className="path-placeholder">Select destination...</div>
+              <button>Browse</button>
+            </div>
+          </div>
+
+          <div className="transfer-options">
+            <div>
+              <span className="option-label">Mode</span>
+              <strong>Safe Copy</strong>
+            </div>
+
+            <div>
+              <span className="option-label">Verification</span>
+              <strong>Quick</strong>
+            </div>
+          </div>
+
+          <div className="actions">
+            <button className="secondary-button">Preview</button>
+            <button className="primary-button">Start Copy</button>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
 
